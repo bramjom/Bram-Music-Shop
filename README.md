@@ -398,16 +398,16 @@ Menambah urlpatterns pada urls.py sebagai berikut:
 
 ### Mengakses keempat URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman
 1.) xml/
-(https://discord.com/channels/@me/817255852259672094/1285502956439076925)
+(https://media.discordapp.net/attachments/817255852259672094/1285502956006936618/localhost8000_xml.png?ex=66ea816c&is=66e92fec&hm=69edfd1193c9f8f95ba30c7ac52fcc0dcdf06c55a2979702f5a3213c19e6803e&=&format=webp&quality=lossless&width=1314&height=655)
 
 2.) json/
-(https://discord.com/channels/@me/817255852259672094/1285503404214321223)
+(https://media.discordapp.net/attachments/817255852259672094/1285503403627384886/localhost8000_json.png?ex=66ea81d6&is=66e93056&hm=32e3cdc1442a4b33e199ef1f99c12f8ca15951222f14a6f0592a80e7560b323a&=&format=webp&quality=lossless&width=1330&height=655)
 
 3.) xml/<str:id>/
-(https://discord.com/channels/@me/817255852259672094/1285503627846221834)
+(https://media.discordapp.net/attachments/817255852259672094/1285503627561144353/localhost8000_xmlbyid.png?ex=66ea820c&is=66e9308c&hm=5be11402e8ea5f24be84c3cda7956d911cb5a1ea19da71a2e0eb205f717ecba0&=&format=webp&quality=lossless&width=1440&height=514)
 
 4.) json/<str:id>/
-(https://discord.com/channels/@me/817255852259672094/1285503764643577889)
+(https://media.discordapp.net/attachments/817255852259672094/1285503764630868019/localhost8000_jsonbyid.png?ex=66ea822c&is=66e930ac&hm=860bc5659d994721a12c6b8854da0cb61ccdc7ebff59c55867938b1e1aae49eb&=&format=webp&quality=lossless&width=1341&height=655)
 
 
 
