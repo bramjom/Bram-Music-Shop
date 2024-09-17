@@ -282,5 +282,139 @@ Bagi saya, Django sering dipilih sebagai framework awal dalam pembelajaran penge
 ## 5) Mengapa model pada Django disebut sebagai ORM?
 Fungsi model ORM (Object-Relational Mapping) pada Django adalah untuk menghubungkan tabel-tabel di basis data relasional dengan objek-objek dalam kode Python. Ini memungkinkan pengembang bekerja dengan data dalam bentuk objek Python tanpa menulis kueri SQL untuk mengelola basis data.
 
-ORM pada Django secara teknis menerjemahkan tindakan atau operasi dari model (seperti menyimpan, mengambil, memperbarui, atau menghapus data) ke dalam perintah SQL yang sesuai untuk berinteraksi dengan database, memungkinkan pengembang mengelola database menggunakan bahasa pemrograman yang mereka gunakan (Python), tanpa harus mempelajari atau menangani detail SQL. Dengan kata lain, ORM memberikan abstraksi antara kode program dan database, sehingga
+ORM pada Django secara teknis menerjemahkan tindakan atau operasi dari model (seperti menyimpan, mengambil, memperbarui, atau menghapus data) ke dalam perintah SQL yang sesuai untuk berinteraksi dengan database, memungkinkan pengembang mengelola database menggunakan bahasa pemrograman yang mereka gunakan (Python), tanpa harus mempelajari atau menangani detail SQL. Dengan kata lain, ORM memberikan abstraksi antara kode program dan database.
+
+
+**----------------------------------------------------------------------------------------------------------------------------------------**
+## Tugas 2
+
+### 1) Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+Karena data merupakan bagian penting dari interaksi, proses, dan layanan yang disediakan oleh platform, pengiriman data sangat penting untuk pengoperasian platform. Berikut adalah beberapa alasan mengapa pengiriman data penting:
+
+**Aksesibilitas Pengguna**: Pengiriman data memungkinkan pengguna mengakses layanan atau informasi yang mereka butuhkan dari platform secara cepat dan tepat waktu, tanpa adanya keterlambatan atau jeda.
+
+**Keputusan Berbasis Data**: Pengiriman data yang cepat dan andal membantu pengambilan keputusan yang akurat berdasarkan data real-time; banyak platform, seperti platform media sosial atau e-commerce, bergantung pada analitik dan pengolahan data untuk memberikan wawasan yang lebih baik.
+
+**Pengalaman Pengguna**: Kecepatan pengiriman data platform sangat penting untuk pengalaman pengguna yang baik; pengiriman data yang lambat pada platform streaming video akan menyebabkan buffering dan pengalaman pengguna yang buruk.
+
+**Konektivitas Antar Komponen**: Dalam arsitektur platform yang terdistribusi, seperti cloud atau microservices, setiap komponen platform bergantung pada data yang dikirim oleh layanan lain. Pengiriman data yang handal menjamin integritas sistem dan kelancaran operasional seluruh komponen.
+
+**Keamanan dan Kepatuhan**: Pengiriman data yang aman memastikan bahwa data sensitif dikirim dengan enkripsi dan metode perlindungan lainnya, mengurangi risiko kebocoran data, dan mematuhi peraturan seperti GDPR.
+
+Platform tidak dapat beroperasi dengan baik tanpa data pengiriman yang baik, yang mengakibatkan kegagalan layanan dan ketidakpuasan pengguna.
+
+### 2) Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+Untuk beberapa tujuan, terutama dalam pengembangan web dan pertukaran data antara klien dan server, JSON (JavaScript Object Notation) dianggap lebih baik daripada XML. Ada beberapa poin keunggulan yang dapat saya rangkum dari JSON:
+
+**Lebih Mudah Dibaca**: Data dalam JSON ditulis dalam format pasangan nilai kunci, mirip dengan objek JavaScript, sehingga lebih mudah dipahami oleh manusia.
+
+**Ukuran Lebih Kecil**: JSON tidak memiliki tag pembuka dan penutup seperti XML, sehingga datanya lebih kecil dan lebih efisien untuk dikirim melalui jaringan.
+
+**Integrasi dengan JavaScript**: Karena JSON merupakan subset dari JavaScript itu sendiri, sangat terintegrasi dengan JavaScript, sehingga pengembang web dapat bekerja dengan data JSON di browser tanpa perlu melakukan parsing manual.
+
+**Parsing Lebih Cepat**: Banyak bahasa pemrograman dapat langsung parsing JSON dengan library bawaan, tetapi parser XML biasanya lebih kompleks, yang dapat memperlambat kinerja.
+
+**Struktur Sederhana**: Format JSON lebih sederhana dan strukturnya lebih sederhana dibandingkan dengan XML yang bergantung pada hierarki tag, sehingga lebih mudah diolah dan digunakan untuk menyimpan data terstruktur.
+
+### 3) Jelaskan fungsi dari method 'is_valid()' pada form Django dan mengapa kita membutuhkan method tersebut?
+Pada form Django, metode is_valid() digunakan untuk memastikan bahwa data yang dimasukkan ke dalam form memenuhi semua validasi yang telah ditentukan. Untuk alasan berikut, peran ini sangat penting dalam proses penanganan form:
+
+**Memeriksa Validitas Input**: Metode is_valid() menjalankan semua validasi yang ditetapkan di kolom formulir untuk memastikan bahwa data sesuai dengan tipe yang diharapkan (seperti email valid, angka dalam rentang yang diperbolehkan, dll.). Jika semua validasi berhasil dilewati, metode ini mengembalikan nilai True, yang menunjukkan bahwa data formulir valid.
+
+**Menangani Data yang Divalidasi**: Jika form valid, is_valid() juga menyiapkan dan membersihkan data yang telah divalidasi. Anda dapat mengakses data yang telah divalidasi ini melalui atribut cleaned_data, yang menyimpan versi "bersih" input formulir, siap untuk digunakan untuk tujuan lain, seperti disimpan ke database atau diproses.
+
+**Mengumpulkan Kesalahan**: Jika validasi gagal, is_valid() mengembalikan False, dan kesalahan validasi yang terjadi dapat diakses melalui atribut kesalahan. Ini memungkinkan pengembang untuk memberi umpan balik kepada pengguna tentang kesalahan input yang harus diperbaiki.
+
+#### Untuk alasan apa metode is_valid() diperlukan?
+**Validasi Form**: Validasi form sangat penting untuk memastikan bahwa data yang diterima aman dan sesuai dengan harapan aplikasi. Tanpa memanggil is_valid(), form tidak akan divalidasi, dan input pengguna mungkin mengandung data yang tidak valid atau berbahaya.
+
+**Error Handling**: Metode is_valid() dapat secara efektif menangani kesalahan input, memastikan bahwa pengguna menerima pesan kesalahan yang relevan, dan form hanya diproses ketika inputnya valid.
+
+### 4) Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+Untuk melindungi aplikasi dari serangan *Cross-Site Request Forgery (CSRF)*, csrf_token diperlukan pada form Django. CSRF adalah jenis serangan di mana penyerang mencoba menipu pengguna untuk mengirimkan permintaan yang tidak sah ke server aplikasi tanpa pengetahuan pengguna.
+
+#### Mengapa csrf_token diperlukan?
+Token khusus yang disebut csrf_token dibuat untuk setiap sesi pengguna dan dimasukkan ke dalam formulir sebagai bagian dari proses validasi. Ketika formulir dikirimkan, token ini diverifikasi oleh server untuk memastikan bahwa permintaan berasal dari sumber yang sah, dalam hal ini dari pengguna yang sebenarnya melalui situs web yang sah.
+
+#### Apa yang akan terjadi jika tidak ada csrf_token?
+Tanpa csrf_token, aplikasi tidak dapat membedakan permintaan pengguna yang sah dari yang dibuat oleh pihak ketiga. Ini memungkinkan pencuri untuk mengirimkan permintaan palsu ke aplikasi yang berpotensi berbahaya melalui situs web lain, yang dapat menyebabkan perubahan data atau tindakan tidak diinginkan, seperti mengubah pengaturan pengguna atau melakukan transaksi tanpa izin.
+
+#### Bagaimana Peretas Dapat Memanfaatkannya?
+Karena browser korban secara otomatis mengirimkan cookies otentikasi ke server, penyerang dapat mengirimkan link atau kode berbahaya ke korban tanpa disadari jika form tidak dilindungi oleh csrf_token. 
+Contoh serangan mungkin termasuk:
+
+1. Transfer uang melalui aplikasi bank online tidak sah.
+2. Mengubah profil data di aplikasi sosial.
+3. Menghapus data atau melakukan operasi sensitif lainnya yang tidak diinginkan korban
+
+Oleh karena itu, csrf_token sangat penting untuk melindungi form aplikasi Django dari serangan CSRF dan untuk menjaga keamanan form.
+
+
+### 5) Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+##### Checkpoint 1 : Membuat input form untuk menambahkan objek model pada app sebelumnya 
+Menambah line "from main.models import Product"
+Jadi, keseluruhan program forms.py sebagai berikut:
+
+    ```python
+    from django.forms import ModelForm
+    from main.models import Product
+
+    class ProductForm(ModelForm):
+        class Meta:
+            model = Product
+            fields = ["name", "price", "description", "quantity"]
+    ```
+
+##### Checkpoint 2 : Tambahkan 4 fungsi views baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID.
+Menambahkan 4 fungsi pada views.py sebagai berikut :
+
+    ```python
+    def show_xml(request):
+    data = Product.objects.all()
+    return HttpResponse(serializers.serialize("xml", data), content_type= "application/xml" )
+
+    def show_json(request):
+        data = Product.objects.all()
+        return HttpResponse(serializers.serialize("json", data), content_type= "application/json")
+
+    def show_xml_by_id(request, id):
+        data = Product.objects.filter(pk=id)
+        return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+    def show_json_by_id(request, id):
+        data = Product.objects.filter(pk=id)
+        return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+    ```
+
+##### Checkpoint 3 : Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 2.
+Menambah urlpatterns pada urls.py sebagai berikut:
+
+    ```python
+    path('json/', show_json, name = "show_json"),
+    path('xml/', show_xml, name = "show_xml"),
+    path('json/<int:id>/', show_json_by_id, name = "show_json_by_id"),
+    path('xml/<int:id>/', show_xml_by_id, name = "show_xml_by_id"),
+    ```
+
+### Mengakses keempat URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman
+1.) xml/
+(https://discord.com/channels/@me/817255852259672094/1285502956439076925)
+
+2.) json/
+(https://discord.com/channels/@me/817255852259672094/1285503404214321223)
+
+3.) xml/<str:id>/
+(https://discord.com/channels/@me/817255852259672094/1285503627846221834)
+
+4.) json/<str:id>/
+(https://discord.com/channels/@me/817255852259672094/1285503764643577889)
+
+
+
+
+
+
+
+
+
 
