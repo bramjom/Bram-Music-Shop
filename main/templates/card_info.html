@@ -1,0 +1,22 @@
+<div class="bg-gray-800 rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 hover:bg-gray-700">
+  <div class="p-4">
+    <!-- Tambahkan ikon berdasarkan tipe info -->
+    <div class="flex items-center mb-2">
+      {% if title == 'NPM' %}
+        <svg class="h-6 w-6 text-red-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.656 0 3-1.344 3-3s-1.344-3-3-3-3 1.344-3 3 1.344 3 3 3zm0 2c-2.75 0-5 2.25-5 5h10c0-2.75-2.25-5-5-5z"/>
+        </svg>
+      {% elif title == 'Name' %}
+        <svg class="h-6 w-6 text-red-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V9a4 4 0 10-8 0v2M5 21h14a2 2 0 002-2v-5a2 2 0 00-2-2H5a2 2 0 00-2 2v5a2 2 0 002 2z"/>
+        </svg>
+      {% elif title == 'Class' %}
+        <svg class="h-6 w-6 text-red-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h8M8 11h8m-7 4h6"/>
+        </svg>
+      {% endif %}
+      <h5 class="text-lg font-semibold text-white">{{ title }}</h5>
+    </div>
+    <p class="text-gray-300">{{ value }}</p>
+  </div>
+</div>
