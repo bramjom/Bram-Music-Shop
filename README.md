@@ -697,5 +697,247 @@ Berikut lampiran informasi kedua pengguna yang saya buat dan cookies yang ditamp
 (https://media.discordapp.net/attachments/817255852259672094/1287781960470495243/image.png?ex=66f2cbe9&is=66f17a69&hm=0aa3fc04d191c4952188f17c1ab926dcb70a9c223abda62af24fc7c91b9f713b&=&format=webp&quality=lossless&width=1440&height=613)
 
 
+**----------------------------------------------------------------------------------------------------------------------------------------**
+## Tugas 5
 
+### 1)  Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
 
+Dalam CSS, ketika terdapat beberapa selector yang berlaku pada elemen yang sama, urutan prioritas pengambilan CSS selector ditentukan oleh **spesifisitas** dan **aturan penting**. Berikut adalah urutan prioritas CSS selector dari yang terendah hingga yang tertinggi:
+
+1. **Elemen Inline**: Jika style diterapkan langsung pada elemen HTML menggunakan atribut `style`, maka ini memiliki prioritas tertinggi kecuali ada aturan `!important`.
+
+```html
+<p style="color: red;">Text in red</p>
+```
+
+2. **Selector Tag/Elemen (Spesifisitas Rendah)**: Selektor yang langsung merujuk pada nama tag HTML, seperti `div`, `p`, atau `h1`.
+
+```css
+p { color: blue; }
+```
+
+3. **Selector Class (Spesifisitas Menengah)**: Selektor yang merujuk pada class tertentu dengan tanda titik (`.`), contohnya `.class-name`.
+
+```css
+.example { color: green; }
+```
+
+**Rumus Spesifisitas**
+Spesifisitas dihitung menggunakan angka dengan urutan:
+
+- *Inline style*: 1000
+- *ID selector*: 100
+- *Class, pseudo-class, attribute selector*: 10
+- *Tag selector dan pseudo-element*: 1
+
+CSS dengan spesifisitas lebih tinggi akan mengalahkan CSS dengan spesifisitas lebih rendah. Jika spesifisitasnya sama, aturan yang didefinisikan paling terakhir di dalam stylesheet akan digunakan.
+
+### 2) Mengapa *responsive design* menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan *responsive design*!
+*Responsive design* adalah salah satu konsep yang sangat penting dalam pengembangan aplikasi web adalah desain responsif, yang memungkinkan antarmuka web menyesuaikan diri secara otomatis dengan berbagai ukuran layar dan perangkat, seperti tablet dan perangkat seluler. Karena penggunaan berbagai ukuran layar semakin meningkat di perangkat ini, desain responsif memastikan pengalaman pengguna yang optimal di semua perangkat yang digunakan. Untuk beberapa alasan, responsif desain sangat penting karena :
+
+1. **Peningkatan Pengalaman Pengguna (User Experience)**
+Situs web dapat diakses dari berbagai perangkat dan ukuran layar. Tampilan web yang responsif tetap mudah digunakan dan nyaman dibaca baik di desktop maupun ponsel. Pengguna tidak perlu menggulir secara horizontal atau *zoom in/out* untuk melihat konten.
+
+2. **Optimasi SEO (Search Engine Optimization)**
+Mesin pencari, seperti Google, memprioritaskan situs yang responsif karena menawarkan pengalaman pengguna seluler yang lebih baik dan memiliki peringkat hasil pencarian yang lebih tinggi, meningkatkan visibilitas web.
+
+3. **Efisiensi Pengembangan dan Pemeliharaan**
+Pengembang dapat membuat situs yang responsif untuk berbagai perangkat daripada harus membuat situs desktop dan seluler terpisah. Ini menghemat waktu dan sumber daya selama pembangunan dan pemeliharaan.
+
+#### Contoh Aplikasi yang Sudah Menerapkan Responsive Design:
+- **Airbnb** : Airbnb menyediakan tampilan yang konsisten dan nyaman di berbagai perangkat, mulai dari desktop hingga ponsel. Pengguna dapat dengan mudah mencari akomodasi, membaca ulasan, dan memesan kamar dengan pengalaman yang mulus terlepas dari perangkat yang digunakan.
+
+- **Spotify** : Spotify menggunakan responsive design untuk memberikan pengalaman pengguna yang optimal di browser web. Tata letak dan navigasi berubah secara otomatis sesuai dengan ukuran layar, baik di desktop maupun di ponsel.
+
+#### Contoh Aplikasi yang Belum Menerapkan Responsive Design:
+- **Situs Web Lama (Korporasi Kecil atau Situs Web Lama)** : Beberapa situs web bisnis kecil atau situs web lama yang belum diperbarui masih menggunakan desain tetap *(fixed layout)* yang tidak menyesuaikan dengan ukuran layar perangkat. Pengguna di perangkat seluler sering kali harus melakukan zoom atau menggulir secara horizontal, yang mengurangi kenyamanan.
+
+- **Beberapa Portal Pemerintah Lama** :  Beberapa situs pemerintah yang belum diperbarui ke standar modern sering kali tidak responsif. Pengguna di perangkat seluler mengalami kesulitan dalam membaca informasi dan melakukan interaksi seperti mengisi formulir.
+
+### 3) Jelaskan perbedaan antara *margin*, *border*, dan *padding, serta cara untuk mengimplementasikan ketiga hal tersebut!*
+Dalam CSS, margin, border, dan padding adalah tiga properti yang digunakan untuk mengatur ruang di sekitar elemen. Berikut adalah penjelasan tentang masing-masing properti, serta bagaimana masing-masing digunakan:
+
+1. **Padding**
+- Definisi: Padding adalah ruang di dalam elemen, antara konten elemen dan tepi dalam border. Padding memberikan ruang antara konten dan batas elemen.
+- Implementasi: Padding dapat diatur secara keseluruhan atau secara spesifik untuk setiap sisi elemen (atas, kanan, bawah, kiri)
+- Contoh Implementasinya:
+```css
+.box {
+  padding: 20px; /* Padding untuk semua sisi */
+  padding-top: 10px;    /* Padding atas */
+  padding-right: 15px;  /* Padding kanan */
+  padding-bottom: 10px; /* Padding bawah */
+  padding-left: 5px;    /* Padding kiri */
+}
+```
+
+2. **Border**
+- Definisi: Border adalah garis di sekitar padding dan konten elemen. Border berfungsi sebagai pembatas visual dari elemen.
+- Implementasi: Border dapat diatur dengan warna, ketebalan, dan gaya (solid, dashed, dll.). Seperti padding, border juga bisa diatur untuk setiap sisi elemen.
+- Contoh Implementasinya:
+```css
+.box {
+  border: 2px solid black; /* Border di semua sisi */
+  border-top: 3px dotted red;    /* Border atas dengan gaya dotted */
+  border-right: 4px dashed blue; /* Border kanan dengan gaya dashed */
+}
+```
+3. **Margin**
+- Definisi: Margin adalah ruang di luar border elemen, yang digunakan untuk mengatur jarak antara elemen tersebut dengan elemen lain di sekitarnya. Margin memberikan ruang di luar elemen untuk memastikan elemen tidak terlalu rapat satu sama lain.
+- Implementasi: Sama seperti padding dan border, margin juga dapat diatur untuk setiap sisi elemen.
+- Contoh Implementasinya:
+```css
+.box {
+  margin: 10px; /* Margin untuk semua sisi */
+  margin-top: 20px;    /* Margin atas */
+  margin-right: 15px;  /* Margin kanan */
+  margin-bottom: 10px; /* Margin bawah */
+  margin-left: 5px;    /* Margin kiri */
+}
+```
+
+### 4) Jelaskan konsep *flex box* dan *grid layout* beserta kegunaannya!
+Dua metode tata letak CSS modern, *Flexbox* dan *Grid Layout*, digunakan untuk merancang tampilan halaman web yang fleksibel dan efisien. Meskipun masing-masing menawarkan fokus yang berbeda, keduanya mempermudah pengaturan elemen pada halaman. Berikut ini adalah penjelasan dari masing-masing ide dan manfaatnya:
+
+1. **Flexbox (Flexible Box Layout)**
+Konsep: Flexbox adalah model tata letak satu dimensi yang digunakan untuk menyusun elemen dalam satu baris atau satu kolom. Model ini mengutamakan fleksibilitas elemen anak dalam wadah, yang memungkinkan mereka beradaptasi secara dinamis dengan ruang yang tersedia.
+
+- **Fitur Utama:**
+-- *Arah Utama (Main Axis)*: Elemen dapat diatur dalam satu baris atau satu kolom.
+Pembagian Ruang Otomatis: Elemen akan secara otomatis mengambil ruang yang tersedia, baik dengan memperluas atau mengecil sesuai ukuran kontainer.
+-- *Pengaturan Alignment dan Distribusi*: Flexbox memungkinkan pengaturan posisi elemen (alignment) dan distribusi ruang antar elemen (spacing) secara dinamis tanpa perlu menggunakan margin atau padding secara manual.
+-- *Urutan Fleksibel*: Elemen dapat diatur urutannya dalam dokumen tanpa mengubah urutan sebenarnya di dalam HTML.
+
+- **Kegunaan**:
+-- Flexbox sangat ideal untuk tata letak yang sederhana dan responsif dalam satu dimensi, seperti membuat menu navigasi horizontal, baris produk, atau kolom artikel.
+-- Cocok untuk tata letak yang perlu dirancang secara fleksibel tanpa ketergantungan pada ukuran tetap
+
+2. **Grid Layout**
+Konsep: Tata letak grid CSS adalah sistem tata letak dua dimensi yang memungkinkan elemen diatur secara bersamaan dalam baris dan kolom. Tata letak grid memberi pengembang kemampuan untuk membuat tata letak yang kompleks dengan pembagian ruang yang lebih tepat.
+
+- **Fitur Utama:**
+-- *Baris dan Kolom*: Grid memungkinkan Anda membuat tata letak dengan berbagai baris dan kolom yang dapat diatur ukurannya.
+-- *Grid Template*: Anda dapat menentukan template grid yang terdiri dari jumlah dan ukuran kolom serta baris secara eksplisit.
+-- *Alignment dan Positioning*: Grid memungkinkan penempatan elemen secara eksplisit pada posisi tertentu di dalam grid (misalnya, elemen bisa ditempatkan pada kolom 2 dan baris 1).
+-- *Responsivitas Lebih Baik*: Grid mempermudah penyesuaian tampilan halaman saat berpindah dari ukuran layar besar (desktop) ke ukuran layar kecil (ponsel).
+
+### 5) Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+Framework CSS yang saya pakai adalah **Tailwind**.
+1. Menambah Tailwind ke Aplikasi dan menambah `global.css` lewat `base.html`
+```html
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/global.css' %}"/>
+```
+
+2. Menambah 3 fungsi pada `views.py`
+a.) Edit product
+```python
+def edit_product(request, id):
+    # Get product entry berdasarkan id
+    product = Product.objects.get(pk = id)
+
+    # Set product entry sebagai instance dari form
+    form = ProductForm(request.POST or None, instance=product)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:products'))
+
+    context = {'form': form}
+    return render(request, "edit_product.html", context)
+```
+
+b.) Delete product
+```python
+def delete_product(request, id):
+    # Get product berdasarkan id
+    product = Product.objects.get(pk = id)
+    # Hapus product
+    product.delete()
+    # Kembali ke halaman awal
+    return HttpResponseRedirect(reverse('main:products'))
+```
+
+c.) Show product cards di navbar "Product"
+```python
+def product_page(request):
+    product_entries = Product.objects.all()  # Ambil semua produk dari database
+    return render(request, 'products.html', {'product_entries': product_entries})
+```
+
+3. Menambahkan Navigation Bar (`navbar.html` di direktori root folder/templates) pada Aplikasi
+Navbar saya sebagai berikut :
+(https://media.discordapp.net/attachments/817255852259672094/1290586995701055550/image.png?ex=66fd004d&is=66fbaecd&hm=6670550e68d85522f72733b31dc8964476d2b2cc7e2a91639dde9ed9213795b0&=&format=webp&quality=lossless&width=1440&height=66)
+
+Saya mengganti tema warna yang sesuai dengan foto dan kostumisasi tailwind nya.
+
+4. Menambahkan `global.css` di direktori `static/css/global.css` untuk tema keseluruhan program
+```css
+.form-style form input, form textarea, form select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid #bcbcbc;
+    border-radius: 0.375rem;
+}
+.form-style form input:focus, form textarea:focus, form select:focus {
+    outline: none;
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px #ef4444;
+}
+@keyframes shine {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+.animate-shine {
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3));
+    background-size: 200% 100%;
+    animation: shine 3s infinite;
+}
+```
+
+5. Memisahkan tampilan cards product dari `main.html` dengan menggunakan html baru di main/templates yaitu `products.html`
+
+```html
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Products - Bram Music Shop</title>
+{% endblock meta %}
+
+{% block content %}
+{% include 'navbar.html' %}
+<div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-gray-900 flex flex-col">
+    <div class="flex justify-end mb-6">
+        <a href="{% url 'main:create_product' %}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+            Add New Product
+        </a>
+    </div>
+    
+    {% if not product_entries %}
+    <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+        <img src="{% static 'image/sedih-banget.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
+        <p class="text-center text-gray-300 mt-4">Belum ada data produk.</p>
+    </div>
+    {% else %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+        {% for product_entry in product_entries %}
+            {% include 'card_product.html' with product_entry=product_entry %}
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}
+```
+
+6. Menambahkan styling css ke beberapa html, di antaranya : 
+- card_info.html
+- card_product.html
+- create_product.html
+- edit_product.html
+- login.html
+- main.html
+- products.html
+- register.html
