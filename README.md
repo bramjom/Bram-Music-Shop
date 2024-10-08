@@ -941,3 +941,179 @@ Saya mengganti tema warna yang sesuai dengan foto dan kostumisasi tailwind nya.
 - main.html
 - products.html
 - register.html
+
+
+**----------------------------------------------------------------------------------------------------------------------------------------**
+## Tugas 6
+
+### 1) Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+Beberapa keuntungan penting dari JavaScript dalam pengembangan aplikasi web antara lain :
+
+1. **Interaktivitas Dinamis**: JavaScript memungkinkan pengembang membuat halaman web lebih menarik dan responsif dengan menambahkan elemen interaktif seperti menu drop-down, slider gambar, dan validasi formulir secara real-time.
+
+2. **Manipulasi Model Objek Dokumen (DOM)**: JavaScript mempermudah mengubah konten dan struktur halaman web secara dinamis tanpa memuat ulang halaman secara keseluruhan. Ini sangat bermanfaat untuk meningkatkan kecepatan dan responsivitas aplikasi web single-page (SPA).
+
+3. **Kompatibilitas dengan semua browser**: JavaScript didukung oleh hampir semua browser kontemporer, yang memungkinkan pengembang membuat aplikasi web yang dapat diakses oleh banyak orang tanpa perlu melakukan banyak perubahan untuk setiap platform.
+
+4. **Integrasi dengan Teknologi Backend**: Framework seperti Node.js memungkinkan pengembang menggunakan JavaScript untuk pengembangan sisi server dan frontend, meningkatkan konsistensi dan efisiensi pengembangan aplikasi web.
+
+5. **Ekosistem dan Libraries yang Kaya**: JavaScript memiliki banyak framework dan library, seperti React, Angular, dan Vue.js, yang membuat pengembangan fitur aplikasi web lebih mudah dan lebih cepat. Selain itu, library seperti jQuery membantu menangani animasi dan interaksi yang kompleks.
+
+6. **Asynchronous Programming**: Dengan fitur seperti AJAX dan promises, JavaScript mendukung asynchronous programming, yang memungkinkan aplikasi web mengambil data dari server tanpa mengganggu interaksi pengguna. Ini meningkatkan kinerja dan pengalaman pengguna secara keseluruhan.
+
+### 2)  Jelaskan fungsi dari penggunaan `await` ketika kita menggunakan `fetch()!` Apa yang akan terjadi jika kita tidak menggunakan `await`?
+
+`await` dalam JavaScript digunakan untuk menunggu penyelesaian dari sebuah `Promise` sebelum melanjutkan eksekusi kode berikutnya. Ketika digunakan bersama `fetch()`, `await` memastikan bahwa program menunggu respons dari server sebelum melanjutkan ke baris kode berikutnya.
+
+#### Fungsi `await` dalam `fetch()`
+1. **Menunggu Respons**: `await` menghentikan eksekusi kode sementara hingga `Promise` yang dikembalikan oleh `fetch()` diselesaikan (baik itu berhasil atau gagal). Setelah `fetch()` selesai, kita bisa langsung menggunakan data respons tanpa perlu menggunakan `.then()` untuk menangani hasilnya.
+2. **Membuat Kode Lebih Bersih dan Mudah Dibaca**: Dengan menggunakan `await`, kode menjadi lebih mirip seperti kode sinkron sehingga lebih mudah dimengerti dan diikuti, terutama ketika ada beberapa operasi asinkron berturut-turut.
+
+#### Apa yang akan terjadi jika kita tidak menggunakan `await`?
+Jika kita tidak menggunakan `await`, maka `fetch()` akan segera mengembalikan sebuah `Promise` dan kode di baris berikutnya akan dieksekusi sebelum respons dari `fetch()` diterima.
+
+### 3) Mengapa kita perlu menggunakan decorator `csrf_exempt` pada view yang akan digunakan untuk AJAX `POST`?
+Ketika kita mengirimkan permintaan AJAX POST ke view Django, Django akan memeriksa apakah ada token CSRF yang sah di dalamnya. Jika tidak ada, Django akan menolak permintaan dan mengembalikannya dengan 403 Forbidden.
+
+Dekorator `@csrf_exempt` digunakan untuk menonaktifkan pengecekan CSRF pada view tertentu. Ini memungkinkan permintaan AJAX POST diproses tanpa memverifikasi token CSRF. Ini dapat bermanfaat dalam situasi tertentu, seperti ketika:
+
+Kita ingin menghindari penambahan token CSRF secara manual pada setiap permintaan AJAX yang dikirim oleh klien karena permintaan berasal dari sumber yang terpercaya dan kami yakin tidak ada risiko CSRF.
+
+### 4) Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+
+Karena alasan keamanan dan keandalan aplikasi, pembersihan data input pengguna juga dilakukan di backend. Berikut adalah 2 poin alasan mengapa ini tidak cukup di frontend:
+
+#### KEAMANAN
+
+1. **Keamanan Frontend Tidak Dapat Diandalkan Sepenuhnya**: Pengguna berbahaya dapat dengan mudah mengubah kode frontend, seperti JavaScript dan HTML. Mereka dapat menggunakan alat seperti alat pengembang di browser atau alat seperti Postman untuk mengirimkan permintaan langsung ke server tanpa mengabaikan validasi frontend yang ada.
+
+2. **Mencegah Serangan Malicious Input**: Pembersihan data di backend melindungi aplikasi dari serangan yang dapat terjadi yang menggunakan input berbahaya, seperti SQL injection, cross-site scripting (XSS), dan lainnya. Sebelum data diproses atau disimpan dalam basis data, data di backend dibersihkan.
+
+#### Konsistensi dan Keandalan
+
+1. **Validasi Universal**: Jika kita hanya mengandalkan validasi di frontend, ada risiko perbedaan validasi yang dapat menyebabkan data yang tidak sesuai masuk ke dalam sistem. Dengan melakukan validasi di backend, kami dapat memastikan bahwa semua input diproses dengan standar yang sama, terlepas dari bagaimana permintaan dikirimkan.
+
+2. **Dukungan untuk Aplikasi Berbasis API**: Backend membantu memastikan bahwa semua input divalidasi dan dibersihkan secara konsisten di setiap klien jika aplikasi memiliki banyak klien, seperti web aplikasi, aplikasi ponsel, atau API pihak ketiga.
+
+
+### 5) Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+#### Perubahan pada `views.py`
+- Import django.views decorator dan utils.html
+```python
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+
+from django.utils.html import strip_tags
+```
+
+- Menambah fungsi baru add product menggunakan AJAX
+```python
+@csrf_exempt
+@require_POST
+def add_product_entry_ajax(request):
+    try:
+        name = strip_tags(request.POST.get("name"))
+        description = strip_tags(request.POST.get("description"))
+        price = request.POST.get("price")
+        quantity = request.POST.get("quantity")
+        user = request.user
+
+        if not price:
+            return HttpResponse("Harga wajib diisi", status=400)
+
+        new_product = Product(
+            name=name,
+            price=price,
+            description=description,
+            quantity=quantity,
+            user=user,
+        )
+        new_product.save()
+
+        return HttpResponse(b"CREATED", status=201)
+    except Exception as e:
+        return HttpResponse(str(e), status=500)
+```
+
+- Perubahan di barisan bagian fungsi `show_json` dan `show_xml`
+```python
+data = Product.objects.filter(user=request.user)
+```
+
+#### Perubahan pada `urls.py`
+
+- Menambah routing untuk add_product_entry_ajax
+```python
+from main.views import add_product_entry_ajax
+
+path('create-product-entry-ajax/', add_product_entry_ajax, name='add_product_entry_ajax'),
+```
+
+#### Perubahan pada `forms.py`
+```python
+from django.utils.html import strip_tags
+def clean_mood(self):
+        mood = self.cleaned_data["mood"]
+        return strip_tags(mood)
+
+    def clean_feelings(self):
+        feelings = self.cleaned_data["feelings"]
+        return strip_tags(feelings)
+```
+
+#### Perubahan pada `products.html`
+- Membuat Modal Sebagai `Form` untuk Menambahkan `Product`
+- Buat script fungsi `showmodal` dan `hideModal`
+
+```javascript
+const modal = document.getElementById('crudModal');
+    const modalContent = document.getElementById('crudModalContent');
+
+    function showModal() {
+        modal.classList.remove('hidden'); 
+        setTimeout(() => {
+            modalContent.classList.remove('opacity-0', 'scale-95');
+            modalContent.classList.add('opacity-100', 'scale-100');
+        }, 50); 
+    }
+
+    function hideModal() {
+        modalContent.classList.remove('opacity-100', 'scale-100');
+        modalContent.classList.add('opacity-0', 'scale-95');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 150); 
+    }
+
+    document.getElementById("cancelButton").addEventListener("click", hideModal);
+    document.getElementById("closeModalBtn").addEventListener("click", hideModal);
+```
+- Buat tombol Add New Product by AJAX 
+```html
+<button data-modal-target="crudModal" data-modal-toggle="crudModal" class="btn bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" onclick="showModal();">
+            Add New Product by AJAX
+        </button>
+```
+
+- Fungsi menambahkan product by AJAX
+```javascript
+function addProductEntry() {
+        fetch("{% url 'main:add_product_entry_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#productEntryForm')),
+        })
+        .then(response => refreshProductEntries());
+
+        document.getElementById("productEntryForm").reset(); 
+        hideModal();
+        return false;
+    }
+
+    document.getElementById("productEntryForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        addProductEntry();
+    });
+```
+
+
