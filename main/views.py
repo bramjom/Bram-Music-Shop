@@ -1,4 +1,5 @@
 import datetime
+import json
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
@@ -9,6 +10,8 @@ from django.urls import reverse
 from django.core import serializers
 from main.models import Product
 from main.forms import ProductForm
+from django.http import JsonResponse
+
 
 #Tugas 6
 from django.views.decorators.csrf import csrf_exempt
@@ -142,3 +145,23 @@ def add_product_entry_ajax(request):
         return HttpResponse(b"CREATED", status=201)
     except Exception as e:
         return HttpResponse(str(e), status=500)
+    
+
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+
+        data = json.loads(request.body)
+        new_product = Product.objects.create(
+            user=request.user,
+            name=data["name"],
+            price=int(data["price"]),
+            description=data["description"],
+            quantity=int(data["quantity"])
+        )
+
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
